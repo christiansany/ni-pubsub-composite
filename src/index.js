@@ -1,14 +1,26 @@
 
 /**
- * Publish-subscribe patern composite
+ * Publish-subscribe pattern composite
  *
  * @param {object} object to append the composite onto
  */
 export default (object) => {
-    let topics = {},
-        uid = -1;
+    const topics = {};
+    const reservedKeys = [
+        'subscribe',
+        'unsubscribe',
+        'unsubscribeAll',
+        'publish',
+        'subscribers'
+    ];
+    let uid = -1;
 
-    // TODO: add a check, that the wanted methodnames are not used
+    // Fail initiation when a reserved key is already in use
+    reservedKeys.forEach((value) => {
+        if (object.hasOwnProperty(value)) {
+            throw new Error('Can\'t apply composite, because a reserved key \'' + value + '\' is already in use', object);
+        }
+    });
 
     /**
      * Add a subscription
@@ -52,13 +64,13 @@ export default (object) => {
      * Remove a subscription
      *
      * @param {integer} topicindex of the topic to be removed
-     * @return {object} object
+     * @return {integer|boolean} topicindex, returns false if no index is found
      */
     object.unsubscribe = (topicindex) => {
         for (var h in topics) {
             if (topics.hasOwnProperty(h)) {
                 for (var i = 0; i < topics[h].queue.length; i++) {
-                    if (topics[h].queue[i].uid === topicindex) {
+                    if (typeof topics[h].queue[i] === 'object' && topics[h].queue[i].hasOwnProperty('uid') && topics[h].queue[i].uid === topicindex) {
                         topics[h].queue[i] = null;
                         return topicindex;
                     }
@@ -66,7 +78,7 @@ export default (object) => {
             }
         }
 
-        return object;
+        return false;
     };
 
     /**
@@ -104,7 +116,15 @@ export default (object) => {
         // Cycle through topics queue, fire!
         var items = topics[topic].queue;
         items.forEach((item) => {
-            item.callback.apply(scope, args || []);
+
+            // Removed subscriptions are still in the array, but not an object
+            if (typeof item === 'object') {
+
+                // If subscriber should only be executed once, and the return of the callback is not false, the subscription will be removed
+                if (item.callback.apply(scope, args || []) !== false && item.once === true) {
+                    object.unsubscribe(item.uid);
+                }
+            }
         });
     };
 

@@ -1,6 +1,45 @@
 import test from 'tape';
 import pubsub from '../src/index';
 
+test('initiation', (t) => {
+
+    t.doesNotThrow(() => {
+        pubsub({});
+    }, 'Initiates composite on clean object');
+
+    t.throws(() => {
+        pubsub({
+            subscribe: 'hallo'
+        });
+    }, 'Object can\'t have reserved keyword \'subscribe\'');
+
+    t.throws(() => {
+        pubsub({
+            unsubscribe: 'hallo'
+        });
+    }, 'Object can\'t have reserved keyword \'unsubscribe\'');
+
+    t.throws(() => {
+        pubsub({
+            unsubscribeAll: 'hallo'
+        });
+    }, 'Object can\'t have reserved keyword \'unsubscribeAll\'');
+
+    t.throws(() => {
+        pubsub({
+            publish: 'hallo'
+        });
+    }, 'Object can\'t have reserved keyword \'publish\'');
+
+    t.throws(() => {
+        pubsub({
+            subscribers: 'hallo'
+        });
+    }, 'Object can\'t have reserved keyword \'subscribers\'');
+
+    t.end();
+});
+
 test('subscribe', (t) => {
 
     const object = {};
@@ -42,6 +81,8 @@ test('subscribe', (t) => {
 
 
 
+
+
         } else {
             t.error('All subscriptions added');
         }
@@ -54,6 +95,18 @@ test('subscribe', (t) => {
 });
 
 test('unsubscribe', (t) => {
+
+    const object = {};
+
+    pubsub(object);
+
+    // uid starts with 0
+    const uid0 = object.subscribe('topic', () => {});
+    const uid1 = object.subscribe('topic', () => {});
+    const uid2 = object.subscribe('topic', () => {});
+
+    const subscribers = object.subscribers();
+
     t.end();
 });
 

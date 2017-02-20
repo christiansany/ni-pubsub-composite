@@ -11,7 +11,7 @@ $ npm install ni-pubsub-composite --save
 
 ## Usage
 
-```javascript
+```js
 // Import the Module
 import pubsubComposite from 'ni-pubsub-composite'
 
@@ -25,17 +25,15 @@ pubsubComposite(someObject);
 
 ## API
 
-* [PubSub](#PubSub)
-    * [new PubSub()](#new_PubSub_new)
-    * [.subscribe(topic, callback, [once])](#PubSub+subscribe) ⇒ <code>number</code>
-    * [.subscribeOnce(topic, callback)](#PubSub+subscribeOnce) ⇒ <code>number</code>
-    * [.publish(topic, [data])](#PubSub+publish) ⇒ <code>boolean</code>
-    * [.publishSync(topic, [data])](#PubSub+publishSync) ⇒ <code>boolean</code>
-    * [.unsubscribe(topic)](#PubSub+unsubscribe) ⇒ <code>boolean</code> &#124; <code>string</code>
-    * [.unsubscribeAll()](#PubSub+unsubscribeAll) ⇒ <code>[PubSub](#PubSub)</code>
-    * [.hasSubscribers([topic])](#PubSub+hasSubscribers) ⇒ <code>Boolean</code>
-    * [.subscribers()](#PubSub+subscribers) ⇒ <code>object</code>
-    * [.alias(aliasMap)](#PubSub+alias) ⇒ <code>[PubSub](#PubSub)</code>
+* [.subscribe(topic, callback, [once])](#PubSub+subscribe) ⇒ <code>number</code>
+* [.subscribeOnce(topic, callback)](#PubSub+subscribeOnce) ⇒ <code>number</code>
+* [.publish(topic, [data])](#PubSub+publish) ⇒ <code>boolean</code>
+* [.publishSync(topic, [data])](#PubSub+publishSync) ⇒ <code>boolean</code>
+* [.unsubscribe(topic)](#PubSub+unsubscribe) ⇒ <code>boolean</code> &#124; <code>string</code>
+* [.unsubscribeAll()](#PubSub+unsubscribeAll) ⇒ <code>[PubSub](#PubSub)</code>
+* [.hasSubscribers([topic])](#PubSub+hasSubscribers) ⇒ <code>Boolean</code>
+* [.subscribers()](#PubSub+subscribers) ⇒ <code>object</code>
+* [.alias(aliasMap)](#PubSub+alias) ⇒ <code>[PubSub](#PubSub)</code>
 
 <a name="new_PubSub_new"></a>
 
@@ -105,34 +103,13 @@ Publishes a topic, passing the data to its subscribers.
 
 **Example**
 ```js
-pubsub.publish('user_add', {
+pubsub.publish('user_added', [{
   firstName: 'John',
   lastName: 'Doe',
   email: 'johndoe@gmail.com'
-});
+}]);
 ```
-<a name="PubSub+publishSync"></a>
 
-### pubSub.publishSync(topic, [data]) ⇒ <code>boolean</code>
-Publishes a topic synchronously, passing the data to its subscribers.
-
-**Kind**: instance method of <code>[PubSub](#PubSub)</code>
-**Returns**: <code>boolean</code> - Returns `true` if topic exists and event is published; otheriwse `false`
-**this**: <code>{PubSub}</code>
-
-| Param | Type | Description |
-| --- | --- | --- |
-| topic | <code>string</code> | The topic's name |
-| [data] | <code>\*</code> | The data to be passed to its subscribers |
-
-**Example**
-```js
-pubsub.publishSync('user_add', {
-  firstName: 'John',
-  lastName: 'Doe',
-  email: 'johndoe@gmail.com'
-});
-```
 <a name="PubSub+unsubscribe"></a>
 
 ### pubSub.unsubscribe(topic) ⇒ <code>boolean</code> &#124; <code>string</code>
@@ -236,19 +213,4 @@ var pubsub = new PubSub().alias({
   unsubscribe: 'off',
   hasSubscribers: 'has'
 });
-```
-
-## Minify
-
-```sh
-$ npm run build
-```
-
-This will run the remove logging and uglify the code into `dist/pubsub.min.js`.
-
-## Test
-
-To run the tests:
-```sh
-$ npm test
 ```
