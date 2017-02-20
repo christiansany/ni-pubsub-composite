@@ -1,7 +1,7 @@
 {
   "name": "ni-pubsub-composite",
   "version": "0.0.0",
-  "description": "",
+  "description": "Composite function to add the publish/subscribe pattern to an object",
   "main": "src/index.js",
   "scripts": {
     "preversion": "npm run lint && npm test",
@@ -12,9 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/notch-interactive/ni-pubsub-composite"
+    "url": "https://github.com/christiansany/ni-pubsub-composite"
   },
-  "author": "Notch Interactive AG",
+  "keywords": [
+    "pubsub",
+    "publish",
+    "subscribe",
+    "composite"
+  ],
+  "author": "Christian Sany <christian.sany@bluewin.ch> (http://christiansany.ch)",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.23.0",
