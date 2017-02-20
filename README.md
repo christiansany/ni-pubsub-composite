@@ -1,15 +1,5 @@
 # ni-pubsub-composite
 
-## Installation
-
-```bash
-$ npm install ni-pubsub-composite --save
-```
-
-
-
-# ni-pubsub-composite
-
 Composite function to add the [publish–subscribe pattern](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) to an object.
 
 ## Install
@@ -17,6 +7,20 @@ Composite function to add the [publish–subscribe pattern](http://en.wikipedia.
 ### npm
 ```sh
 $ npm install ni-pubsub-composite --save
+```
+
+## Usage
+
+```javascript
+// Import the Module
+import pubsubComposite from 'ni-pubsub-composite'
+
+// Create an object or have one already
+const someObject = {};
+
+// Add publish–subscribe pattern to object
+pubsubComposite(someObject);
+
 ```
 
 ## API
