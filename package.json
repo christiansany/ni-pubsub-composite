@@ -1,6 +1,6 @@
 {
   "name": "ni-pubsub-composite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Composite function to add the publish/subscribe pattern to an object",
   "main": "src/index.js",
   "scripts": {
