@@ -2,9 +2,8 @@
 
 Composite function to add the [publish–subscribe pattern](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) to an object.
 
-## Install
+## Install using npm
 
-### npm
 ```sh
 $ npm install ni-pubsub-composite --save
 ```
@@ -26,9 +25,7 @@ pubsubComposite(someObject);
 ## API
 
 * [.subscribe(topic, callback, [once])](#PubSub+subscribe) ⇒ <code>number</code>
-* [.subscribeOnce(topic, callback)](#PubSub+subscribeOnce) ⇒ <code>number</code>
 * [.publish(topic, [data])](#PubSub+publish) ⇒ <code>boolean</code>
-* [.publishSync(topic, [data])](#PubSub+publishSync) ⇒ <code>boolean</code>
 * [.unsubscribe(topic)](#PubSub+unsubscribe) ⇒ <code>boolean</code> &#124; <code>string</code>
 * [.unsubscribeAll()](#PubSub+unsubscribeAll) ⇒ <code>[PubSub](#PubSub)</code>
 * [.hasSubscribers([topic])](#PubSub+hasSubscribers) ⇒ <code>Boolean</code>
